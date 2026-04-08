@@ -34,6 +34,11 @@ Este proyecto ha sido sometido a una profunda revisión técnica y estética, tr
 - **Vitest Integration**: Configuración inicial para pruebas unitarias.
 - **Sample Tests**: Creación de pruebas para la lógica de validación.
 
+### 6. Modernización de Dependencias (Actual)
+- **Frontend**: Migración a **React 19**, **Redux Toolkit 2.x** y **Vite 6+**.
+- **Backend**: Salto a **Express 5**, **Sequelize 6.37+** y **Axios 1.15**.
+- **Seguridad**: Eliminación de vulnerabilidades mediante la alineación con las versiones más estables.
+
 ## 🛠️ Cómo Ejecutar Localmente
 
 ### Frontend

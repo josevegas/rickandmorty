@@ -1,5 +1,13 @@
 # CHANGELOG: Rick & Morty Multiverso
 
+## [1.1.0] - 2026-04-08
+ 
+### 🔵 Modernización
+- **Tech Stack**: Actualización masiva de dependencias en Frontend y Backend.
+- **Frontend**: Migración a **React 19**, **Redux Toolkit 2.x**, **Vite 6+**, **React Router 7**.
+- **Backend**: Actualización a **Express 5**, **Sequelize 6.37**, **Axios 1.15**.
+- **Estabilidad**: Resolución de vulnerabilidades y optimización de auditoría de paquetes.
+
 ## [1.0.0] - 2026-04-01
 
 ### 🟢 Añadido
