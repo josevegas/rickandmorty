@@ -6,7 +6,10 @@ const router = require('./routes/index.js');
 const app = express();
 app.use(morgan('dev'));
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: "*",
+  credentials: true,
+}));
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*'); /* https://viandaexpress.vercel.app, http://localhost:5173 */
   res.header("Access-Control-Allow-Credentials", "true");
