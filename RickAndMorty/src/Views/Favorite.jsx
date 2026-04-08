@@ -1,53 +1,83 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { getAllCharsAction } from "../../redux/cardSlice";
 import Card from "../Component/Card";
-import { useSelector } from "react-redux";
 import Paginado from "../Component/Paginado";
 
-const Favorite=()=>{
-    const allChards=useSelector(state=>state.cardsReducer.allCards)
-    const fav=useSelector(state=>state.cardsReducer.favoriteCards)
-    let favChars=[]
-    const [currentPage,setCurrentPage]=useState(1);
-    const [cardsPerPage,setCardsPerPage]=useState(10);
-    fav.map(f=>{
-        const char=allChards.filter(ch=>ch.id===f)[0]
-        favChars=([...favChars,char]);
-    })
-    const indexCut=currentPage*cardsPerPage;
-    const indexFirstCard=indexCut-cardsPerPage;
-    const currentCards=favChars.slice(indexFirstCard,indexCut);
-    console.log(currentCards)
-    const backHome=()=>{
-        Navigate("/home")
-    }
+const Favorite = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const allCards = useSelector(state => state.cardsReducer.allCards);
+    const favIds = useSelector(state => state.cardsReducer.favoriteCards);
+    
+    // Si entramos a la ruta y la lista global está vacía (por ej. tras F5),
+    // pedimos todas las cartas al backend para poder cruzar los IDs de favoritos.
+    useEffect(() => {
+        if (allCards.length === 0) {
+            dispatch(getAllCharsAction());
+        }
+    }, [dispatch, allCards.length]);
 
-    const paginado=(pageNumber)=>{
+    // Efficiently get favorite character objects
+    const favoriteCharacters = allCards.filter(char => 
+        favIds.includes(char.id) || favIds.some(fid => Number(fid) === Number(char.id))
+    );
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [cardsPerPage] = useState(6);
+
+    const indexCut = currentPage * cardsPerPage;
+    const indexFirstCard = indexCut - cardsPerPage;
+    const currentCards = favoriteCharacters.slice(indexFirstCard, indexCut);
+
+    const paginado = (pageNumber) => {
         setCurrentPage(pageNumber);
     }
 
-    return(
-        <div>
-            <h1 className="text-bg-dark">Favoritos</h1>
-            <div className="row">
-                <Paginado cardsPerPage={cardsPerPage} allCards={favChars.length} paginado={paginado} currentPage={currentPage} />
-                {
-                    currentCards.map(({id,name,gender,image,species})=>{
-                        return <Card 
-                            key={id}
-                            id={id}
-                            name={name}
-                            gender={gender}
-                            image={image}
-                            species={species}
-                            isFav={true}
+    return (
+        <div className="favorite-view">
+            <header className="mb-5 text-center">
+                <h1 className="display-4 orbitron title-neon">MIS FAVORITOS</h1>
+                <p className="lead text-light">Tu colección personalizada del multiverso</p>
+            </header>
+
+            {favoriteCharacters.length > 0 ? (
+                <>
+                    <section className="pagination-top d-flex justify-content-center mb-4">
+                        <Paginado 
+                            cardsPerPage={cardsPerPage} 
+                            allCards={favoriteCharacters.length} 
+                            paginado={paginado} 
+                            currentPage={currentPage} 
                         />
-                    })
-                }
-            </div>
-            <button onClick={backHome} className="btn btn-primary">Volver a Home</button>
+                    </section>
+
+                    <section className="row g-4">
+                        {currentCards.map(({ id, name, gender, image, species }) => (
+                            <Card 
+                                key={id}
+                                id={id}
+                                name={name}
+                                gender={gender}
+                                image={image}
+                                species={species}
+                                isFav={true}
+                            />
+                        ))}
+                    </section>
+                </>
+            ) : (
+                <div className="text-center py-5 glass-effect rounded-4">
+                    <h3 className="orbitron h2 mb-4">Aún no tienes favoritos</h3>
+                    <p className="text-light opacity-75 mb-5">¡Explora el Home y haz clic en el corazón para agregar personajes!</p>
+                    <button onClick={() => navigate("/home")} className="btn btn-primary px-5 py-3 orbitron">
+                        IR A EXPLORAR
+                    </button>
+                </div>
+            )}
         </div>
-    )
-}
+    );
+};
 
 export default Favorite;

@@ -1,0 +1,27 @@
+# CHANGELOG: Rick & Morty Multiverso
+
+## [1.0.0] - 2026-04-01
+
+### 🟢 Añadido
+- **Servicio Centralizado**: Creación de `src/services/api.js` con Axios.
+- **Botón Random**: Funcionalidad de añadir personaje aleatorio (1-826) en SearchBar.
+- **Glassmorphism**: Nuevo diseño visual para Cards, NavBar y Formulario.
+- **Testing**: Integración de `vitest` y pruebas unitarias para `Validation.js`.
+- **Accesibilidad**: Labels ARIA y descripciones dinámicas de imágenes.
+- **Fuentes Premium**: Integración de Google Fonts (`Orbitron`, `Roboto`).
+
+### 🟡 Modificado
+- **App.jsx**: Refactorización completa de la lógica de enrutamiento y autenticación.
+- **Redux Slice**: Mejora en la optimización de los casos de Redux Toolkit.
+- **Views Reestructuradas**: `About`, `Detail`, `Favorite` y `Home` ahora usan Grid de Bootstrap 5 correctamente.
+- **Estilos Globales**: `style.css` completamente reescrito para un look premium.
+- **Carpetas Backend**: Renombrado de `/scr` a `/src` para seguir estándares de la industria.
+
+### 🔴 Corregido
+- **Error de Inconsistencia**: El estado `setAccess` ahora maneja booleanos consistentes.
+- **Error de ID duplicado**: Evita añadir personajes que ya están en la lista (basado en `allCards`).
+- **Navegación Móvil**: El NavBar ya no colapsa sus elementos internos en viewports pequeños.
+- **Errores de Red**: Manejo de errores en promesas (async/await) para avisar al usuario si el servidor está caído.
+
+---
+*Desarrollado con altos estándares de Ingeniería de Software.*

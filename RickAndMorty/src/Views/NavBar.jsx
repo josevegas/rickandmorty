@@ -1,26 +1,48 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import SearchBar from '../Component/SearchBar.jsx';
-import {useDispatch} from 'react-redux';
-import {closeAction} from '../../redux/cardSlice.js'
 
-const NavBar=(props)=>{
-    const dispatch=useDispatch();
-    const handleClose=(e)=>{
-       dispatch(closeAction());
-    }
-    return(
-        <div className='navbar navbar-expand-lg bg-body-tertiary' style={{backgroundColor: '#fcff4fc9'}}>
-            <div className='container-fluid'>
-                <NavLink to='/home' className='navbar-brand'>Home</NavLink>
-                <NavLink to='/about' className='navbar-brand'>About</NavLink>
-                <NavLink to='/favorite' className='navbar-brand'>Favorites</NavLink>
-                <SearchBar onSearch={(characterID) =>props.onSearch(characterID)} />
-                <NavLink to='/' className='navbar-brand'><button type="button" className="btn btn-danger m-2" onClick={handleClose}>Cerrar</button></NavLink>
+const NavBar = ({ onSearch, onRandom, logout }) => {
+    return (
+        <nav className="navbar navbar-expand-lg navbar-dark glass-effect fixed-top">
+            <div className="container-fluid">
+                <NavLink to="/home" className="navbar-brand orbitron" style={{ color: 'var(--portal-green)', fontWeight: '700' }}>
+                    R&M MULTIVERSE
+                </NavLink>
+                
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+                
+                <div className="collapse navbar-collapse" id="navbarText">
+                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li className="nav-item">
+                            <NavLink to="/home" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Home</NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink to="/favorite" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Favoritos</NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink to="/about" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Sobre mí</NavLink>
+                        </li>
+                    </ul>
+                    <div className="d-flex align-items-center gap-3">
+                        <SearchBar onSearch={onSearch} onRandom={onRandom} />
+                        <button 
+                            className="btn btn-outline-danger btn-sm orbitron" 
+                            onClick={logout}
+                            aria-label="Cerrar sesión"
+                            style={{ fontSize: '0.7rem' }}
+                        >
+                            SALIR
+                        </button>
+                    </div>
+
+                </div>
             </div>
-            
-        </div>
+        </nav>
     )
 }
 
 export default NavBar;
+

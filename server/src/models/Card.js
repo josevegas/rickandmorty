@@ -1,39 +1,44 @@
-const {DataTypes}=require('sequelize');
+const { DataTypes } = require('sequelize');
 
-module.exports=(sequelize)=>{
+module.exports = (sequelize) => {
     sequelize.define(
         'Card',
         {
-            id:{
+            id: {
                 type: DataTypes.STRING,
                 primaryKey: true,
             },
-            name:{
+            name: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            status:{
-                type: DataTypes.STRING,
-                allowNull: false, 
-            },
-            species:{
+            status: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            origin:{
+            species: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            gender:{
+            origin: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            image:{
+            location: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                defaultValue: 'Unknown'
+            },
+            gender: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            image: {
                 type: DataTypes.STRING,
                 allowNull: false,
                 isURL: true,
             },
         },
-        {timestamp: false},
+        { timestamps: false },
     );
 };

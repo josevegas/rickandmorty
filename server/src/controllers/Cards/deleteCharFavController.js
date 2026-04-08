@@ -6,7 +6,7 @@ const deleteCharFavController=async (email,id)=>{
             email: email,
         }
     });
-    await userByEmail.removeCards(id);
+    await userByEmail.removeCard(id);
     return 'Favorito removido';
 }
 

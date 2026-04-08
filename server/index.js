@@ -1,6 +1,6 @@
-const app=require('./scr/app.js');
+const app=require('./src/app.js');
 require('dotenv').config();
-const {sequelize}=require('./scr/db.js');
+const {sequelize}=require('./src/db.js');
 
 const {PORT}=process.env;
 sequelize.sync({force:false}).then(()=>{
