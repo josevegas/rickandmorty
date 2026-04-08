@@ -6,27 +6,23 @@ const CardFunction = require('./models/Card.js');
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DB_PORT, DATABASE_URL } = process.env;
 
 const sequelize = DATABASE_URL
-    ? new Sequelize(DATABASE_URL, { 
-        logging: false, 
+    ? new Sequelize(DATABASE_URL || `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`, {
+        logging: false,
         native: false,
         dialectOptions: {
-            ssl: DATABASE_URL.includes('railway') || DATABASE_URL.includes('render') ? {
+            ssl: DB_HOST && DB_HOST !== 'localhost' ? {
                 require: true,
                 rejectUnauthorized: false
             } : false
         }
-    })
-    : new Sequelize(
-        `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`,
-        { logging: false, native: false }
-    );
+    };
 
 UserFunction(sequelize);
 CardFunction(sequelize);
 
-const {User,Card}=sequelize.models;
+const { User, Card } = sequelize.models;
 
-User.belongsToMany(Card,{through: 'Favorite', timestamps: false});
-Card.belongsToMany(User,{through: 'Favorite', timestamps: false});
+User.belongsToMany(Card, { through: 'Favorite', timestamps: false });
+Card.belongsToMany(User, { through: 'Favorite', timestamps: false });
 
-module.exports={sequelize,...sequelize.models};
+module.exports = { sequelize, ...sequelize.models };
