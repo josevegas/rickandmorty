@@ -38,7 +38,17 @@ Este proyecto ha sido sometido a una profunda revisión técnica y estética, tr
 - **Frontend**: Migración a **React 19**, **Redux Toolkit 2.x** y **Vite 6+**.
 - **Backend**: Salto a **Express 5**, **Sequelize 6.37+** y **Axios 1.15**.
 - **Seguridad**: Eliminación de vulnerabilidades mediante la alineación con las versiones más estables.
-
+### 7. Seguridad de Contraseñas (Hashing)
+- **Cifrado Robusto**: Las contraseñas de los usuarios ya no se guardan en texto plano. Se utiliza **bcryptjs** con un factor de costo (salt rounds) de **10**.
+- **Autenticación Segura**: La verificación se realiza mediante comparaciones de hash, garantizando que incluso si la base de datos es comprometida, las contraseñas originales permanezcan protegidas.
+- **Rutas Protegidas**: Se migraron los endpoints de autenticación de `GET` con parámetros en URL a `POST` con cuerpo (JSON) para evitar que las credenciales queden registradas en logs de red o servidores.
+- **Rate Limiting**: Implementación de `express-rate-limit` para prevenir ataques de fuerza bruta en los intentos de login.
+- **Script de Migración**: Se incluyó un script automático (`src/migratePasswords.js`) para hashear de forma segura las contraseñas de usuarios existentes sin perder acceso.
+### 8. Filtros y Búsqueda Avanzada (AND Logic)
+- **Búsqueda en Tiempo Real**: Implementación de un campo de búsqueda por nombre con **debounce** (400ms) para optimizar el rendimiento.
+- **Lógica Combinada**: Los filtros de género, estado y la búsqueda por texto funcionan bajo un **AND lógico**. Solo los personajes que cumplan TODAS las condiciones activas son mostrados.
+- **Estado Global Centralizado**: Refactorización del store de Redux para manejar los criterios de filtrado como un único objeto de estado, asegurando consistencia en la UI.
+- **Feedback Visual**: Mensajes personalizados cuando no hay resultados que coincidan con los criterios aplicados.
 ## 🛠️ Cómo Ejecutar Localmente
 
 ### Frontend
@@ -54,8 +64,12 @@ cd server
 npm install
 npm start
 ```
-*Note: Asegúrate de tener las variables de entorno configuradas si utilizas la base de datos local.*
-
+### Migración de Base de Datos
+Si ya tienes usuarios creados, ejecuta el script de migración para hashear sus contraseñas:
+```bash
+cd server
+node src/migratePasswords.js
+```
 ---
 
 ## 📋 Lista de Cambios Detallada (CHANGELOG.md)

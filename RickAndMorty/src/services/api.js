@@ -29,7 +29,7 @@ export const getAllCharacters = async () => {
 
 export const loginUser = async (email, password) => {
   try {
-    const { data } = await api.get(`/user/${email}/${password}`);
+    const { data } = await api.post('/user/login', { email, password });
     return data;
   } catch (error) {
     console.error('Login error:', error);
@@ -40,7 +40,7 @@ export const loginUser = async (email, password) => {
 export const registerUser = async (userData) => {
   const { email, password } = userData;
   try {
-    const { data } = await api.post(`/user/${email}/${password}`);
+    const { data } = await api.post('/user/signup', { email, password });
     return data;
   } catch (error) {
     console.error('Registration error:', error);

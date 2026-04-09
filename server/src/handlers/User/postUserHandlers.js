@@ -1,14 +1,14 @@
 const {postUserController}=require('../../controllers/Users/postUserController.js');
 
 const postUserHandler=async (req,res)=>{
-    const {email,password}=req.params;
+    const {email,password}=req.body;
     try {
         const newUser=await postUserController(email,password);
-            if(newUser){
-                res.status(200).send(newUser.data);
-            }
+        if(newUser){
+            res.status(200).json(newUser);
+        }
     } catch (error) {
-        res.status(400).send({error: error.message});
+        res.status(400).json({error: error.message});
     }
 };
 

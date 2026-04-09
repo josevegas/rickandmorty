@@ -75,8 +75,9 @@ const Home = () => {
                             />
                         })
                     ) : (
-                        <div className="col-12 text-center py-5">
-                            <h3 className="text-muted">No se encontraron personajes. ¡Prueba buscando uno!</h3>
+                        <div className="col-12 text-center py-5 glass-effect rounded-4">
+                            <h3 className="text-warning orbitron mb-0">No se encontraron personajes.</h3>
+                            <p className="text-light opacity-50 mt-2">Prueba ajustando los filtros o el texto de búsqueda.</p>
                         </div>
                     )}
                 </div>

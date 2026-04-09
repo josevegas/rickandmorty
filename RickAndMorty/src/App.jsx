@@ -54,32 +54,7 @@ const App = () => {
         }
     }, [sessionChecked, access, navigate, location.pathname]);
 
-    const onSearch = async (id) => {
-        // Sanitización básica de entrada
-        const sanitizedId = String(id).replace(/[^0-9]/g, '');
-        if (!sanitizedId) return;
-        
-        try {
-            const { data } = await api.get(`card/${sanitizedId}`);
-            if (data.name) {
-                if (characters.some((char) => char.id === data.id)) {
-                    window.alert('Ya agregaste a este personaje');
-                } else {
-                    dispatch(getCharAction(sanitizedId));
-                }
-            } else if (data.error) {
-                window.alert(data.error);
-            }
-        } catch (error) {
-            console.error(error);
-            window.alert('Hubo un error al buscar el personaje.');
-        }
-    };
 
-    const onRandom = () => {
-        const randomId = Math.floor(Math.random() * 826) + 1;
-        onSearch(randomId);
-    };
 
     const login = async (userData) => {
         const { email, password } = userData;
@@ -115,21 +90,23 @@ const App = () => {
     const sign = async (userData) => {
         const { email, password } = userData;
         try {
-            const { data } = await api.post(`user/${email}/${password}`);
-            if (data.access) {
+            const { data } = await api.post('/user/signup', { email, password });
+            // Si el registro fue exitoso (data tiene id), logueamos al usuario
+            if (data.id) {
                 setAccess(true);
                 login(userData);
             }
         } catch (error) {
             console.error(error);
-            window.alert('Error en el registro');
+            const errorMsg = error.response?.data?.error || 'Error en el registro';
+            window.alert(errorMsg);
         }
     };
 
     return (
         <div className="app-container">
             {access && location.pathname !== "/" && (
-                <NavBar onSearch={onSearch} onRandom={onRandom} logout={logout} />
+                <NavBar logout={logout} />
             )}
             <main className="container py-4">
                 <Routes>

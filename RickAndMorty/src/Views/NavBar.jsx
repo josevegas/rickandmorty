@@ -1,8 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import SearchBar from '../Component/SearchBar.jsx';
 
-const NavBar = ({ onSearch, onRandom, logout }) => {
+const NavBar = ({ logout }) => {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark glass-effect fixed-top">
             <div className="container-fluid">
@@ -26,8 +25,7 @@ const NavBar = ({ onSearch, onRandom, logout }) => {
                             <NavLink to="/about" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Sobre mí</NavLink>
                         </li>
                     </ul>
-                    <div className="d-flex align-items-center gap-3">
-                        <SearchBar onSearch={onSearch} onRandom={onRandom} />
+                    <div className="d-flex align-items-center">
                         <button 
                             className="btn btn-outline-danger btn-sm orbitron" 
                             onClick={logout}
