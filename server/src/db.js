@@ -5,16 +5,21 @@ const CardFunction = require('./models/Card.js');
 
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DB_PORT, DATABASE_URL } = process.env;
 
-const sequelize = new Sequelize(DATABASE_URL || `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`, {
-    logging: false,
-    native: false,
-    dialectOptions: {
-        ssl: DB_HOST && DB_HOST !== 'localhost' ? {
-            require: true,
-            rejectUnauthorized: false
-        } : false
-    }
-});
+const sequelize = DATABASE_URL
+    ? new Sequelize(DATABASE_URL, {
+        logging: false,
+        native: false,
+        dialectOptions: {
+            ssl: DATABASE_URL.includes('railway') || DATABASE_URL.includes('render') ? {
+                require: true,
+                rejectUnauthorized: false
+            } : false
+        }
+    })
+    : new Sequelize(
+        `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`,
+        { logging: false, native: false }
+    );
 
 UserFunction(sequelize);
 CardFunction(sequelize);
