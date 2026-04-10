@@ -14,6 +14,7 @@ Se ha llevado a cabo una auditoría y mejora integral de la aplicación. El resu
 | **Accesibilidad Deficiente** | Media | Adición de ARIA labels, roles semánticos y alt text dinámico en imágenes. |
 | **Lógica de Autenticación Inconsistente** | Media | Estandarización de `setAccess` y corrección de redirecciones en `App.jsx`. |
 | **Tiempo de Carga API Externa** | Alta | Se implementó un sistema de **Sincronización y Caché en PostgreSQL**, reduciendo esperas tras la carga inicial. |
+| **Carga de Datos Masiva** | Media | Optimización de carga inicial a 10 páginas + sistema de **Carga Incremental (5 páginas)** mediante tarjeta "Load More". |
 | **Falta de Feedback de Carga** | Media | Creación de componente `Loading` con animación de **Portal Dimensional** (CSS/JSX). |
 | **Alertas Intrusivas (window.alert)** | Baja | Se mejoró el código para facilitar la transición a un sistema de Toast futuro. |
 

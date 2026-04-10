@@ -5,6 +5,7 @@ import Card from "../Component/Card";
 import Paginado from "../Component/Paginado";
 import Filters from "../Component/Filters";
 import Loading from "../Component/Loading";
+import LoadMoreCard from "../Component/LoadMoreCard";
 
 /**
  * Home View: The main dashboard of the application.
@@ -38,6 +39,9 @@ const Home = () => {
         setCurrentPage(pageNumber);
     }
 
+    const totalCharactersInApi = 826;
+    const isLastPage = currentPage >= Math.ceil(characters.length / cardsPerPage);
+    const hasMoreInApi = allCharacters.length < totalCharactersInApi;
 
     return (
         <div className="home-view">
@@ -79,7 +83,11 @@ const Home = () => {
                                     isFav={isFav}
                                 />
                             })
-                        ) : (
+                        ) : null}
+                        
+                        {isLastPage && hasMoreInApi && <LoadMoreCard />}
+
+                        {currentCards.length === 0 && !hasMoreInApi && (
                             <div className="col-12 text-center py-5 glass-effect rounded-4">
                                 <h3 className="text-warning orbitron mb-0">No se encontraron personajes.</h3>
                                 <p className="text-light opacity-50 mt-2">Prueba ajustando los filtros o el texto de búsqueda.</p>

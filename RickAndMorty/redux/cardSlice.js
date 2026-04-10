@@ -158,6 +158,17 @@ export const getAllCharsAction = () => async (dispatch) => {
     }
 }
 
+export const syncMoreAction = () => async (dispatch) => {
+    try {
+        dispatch(setLoadingCase(true));
+        const { data: characters } = await api.get('card/sync-more');
+        dispatch(getAllCharsCase(characters));
+    } catch (error) {
+        console.error('Error in syncMoreAction:', error);
+        dispatch(setLoadingCase(false));
+    }
+}
+
 export const getLoginAction=(email,password)=>async (dispatch)=>{
 
     try {

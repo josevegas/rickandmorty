@@ -37,23 +37,23 @@ const Detail = ({ characters }) => {
                     <div className="detail-info mb-5">
                         <div className="row g-4">
                             <div className="col-6">
-                                <h4 className="text-info orbitron h6 small mb-1">Status</h4>
+                                <h4 className="orbitron h6 small mb-1" style={{ color: 'var(--portal-blue)', fontWeight: '700' }}>Status</h4>
                                 <p className={`lead fw-bold ${character.status === 'Alive' ? 'text-success' : character.status === 'Dead' ? 'text-danger' : 'text-warning'}`}>{character.status}</p>
                             </div>
                             <div className="col-6">
-                                <h4 className="text-info orbitron h6 small mb-1">Especie</h4>
+                                <h4 className="orbitron h6 small mb-1" style={{ color: 'var(--portal-blue)', fontWeight: '700' }}>Especie</h4>
                                 <p className="lead text-light">{character.species}</p>
                             </div>
                             <div className="col-6">
-                                <h4 className="text-info orbitron h6 small mb-1">Género</h4>
+                                <h4 className="orbitron h6 small mb-1" style={{ color: 'var(--portal-blue)', fontWeight: '700' }}>Género</h4>
                                 <p className="lead text-light">{character.gender}</p>
                             </div>
                             <div className="col-6">
-                                <h4 className="text-info orbitron h6 small mb-1">Origen</h4>
+                                <h4 className="orbitron h6 small mb-1" style={{ color: 'var(--portal-blue)', fontWeight: '700' }}>Origen</h4>
                                 <p className="lead text-light">{character.origin}</p>
                             </div>
                             <div className="col-6">
-                                <h4 className="text-info orbitron h6 small mb-1">Location</h4>
+                                <h4 className="orbitron h6 small mb-1" style={{ color: 'var(--portal-blue)', fontWeight: '700' }}>Location</h4>
                                 <p className="lead text-light">{character.location}</p>
                             </div>
                         </div>

@@ -39,16 +39,23 @@ body {
 
 /* Glassmorphism */
 .glass-effect {
-  background: var(--glass-bg);
-  backdrop-filter: blur(10px);
+  background: rgba(15, 18, 20, 0.75);
+  backdrop-filter: blur(15px);
   border: 1px solid var(--glass-border);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
 }
 
 h1, h2, h3 {
   font-family: 'Orbitron', sans-serif;
   text-transform: uppercase;
   letter-spacing: 2px;
+}
+
+.title-neon {
+  color: var(--portal-green);
+  text-shadow: 
+    0 0 10px rgba(151, 206, 76, 0.5),
+    2px 2px 4px rgba(0, 0, 0, 0.9);
 }
 
 .card {
@@ -307,6 +314,41 @@ h1, h2, h3 {
 @keyframes progress-slide {
   from { transform: translateX(-100%); }
   to { transform: translateX(200%); }
+}
+
+
+/* — Load More Card — */
+.load-more-card {
+  background: rgba(15, 18, 20, 0.8) !important;
+  border: 2px dashed var(--portal-green) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.load-more-card:hover {
+  background: rgba(15, 18, 20, 0.95) !important;
+  border-style: solid !important;
+  transform: scale(1.02) translateY(-5px) !important;
+  box-shadow: 0 0 40px var(--portal-green) !important;
+}
+
+.load-more-card:hover h3, 
+.load-more-card:hover p {
+  text-shadow: 0 0 10px rgba(0, 0, 0, 1);
+}
+
+.portal-mini-loader {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin: 0 auto;
+  background: conic-gradient(from 0deg, var(--portal-green), transparent);
+  animation: portal-spin 1.5s linear infinite;
+  box-shadow: 0 0 15px var(--portal-green);
+}
+
+.text-portal-green {
+  color: var(--portal-green);
 }
 
 /* Responsive adjustments */

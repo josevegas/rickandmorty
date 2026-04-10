@@ -1,4 +1,11 @@
 
+## [1.2.1] - 2026-04-09
+
+### 🔄 Carga Incremental Sincronizada
+- **Sincronización Bajo Demanda**: Implementación de una tarjeta de "Cargar Más" en la última página que permite sincronizar 5 páginas adicionales (100 personajes) de la API oficial con un solo clic.
+- **Carga Inicial Ultrarrápida**: Reducción del volumen de datos inicial a las primeras 10 páginas, optimizando el tiempo de respuesta en el primer acceso.
+- **UI Proactiva**: La tarjeta de carga aparece solo cuando hay datos pendientes en el multiverso externo.
+
 ## [1.2.0] - 2026-04-09
 
 ### 🚀 Optimización y Rendimiento
