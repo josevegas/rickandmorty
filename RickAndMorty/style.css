@@ -212,6 +212,103 @@ h1, h2, h3 {
   font-weight: 600;
 }
 
+
+/* — Loading Animation (Portal) — */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: 2rem;
+  padding: 3rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(15px);
+  border-radius: 30px;
+  border: 1px solid var(--portal-green);
+  margin: 2rem 0;
+}
+
+.portal-loader {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, var(--portal-green) 0%, transparent 70%);
+  animation: portal-spin 2s linear infinite;
+  box-shadow: 0 0 50px var(--portal-green);
+}
+
+.portal-inner {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    #97ce4c,
+    #f0e14a,
+    #00b5cc,
+    #97ce4c
+  );
+  filter: blur(5px);
+  animation: portal-pulse 1.5s ease-in-out infinite alternate;
+}
+
+.portal-text {
+  position: absolute;
+  top: 170px;
+  width: 300px;
+  text-align: center;
+  font-family: 'Orbitron', sans-serif;
+  color: var(--portal-green);
+  text-shadow: 0 0 10px var(--portal-green);
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.loading-info {
+  text-align: center;
+  margin-top: 3rem;
+  color: #fff;
+  opacity: 0.8;
+}
+
+.progress-mini {
+  width: 100%;
+  max-width: 400px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+.progress-bar-infinite {
+  width: 50%;
+  height: 100%;
+  background: var(--portal-green);
+  box-shadow: 0 0 10px var(--portal-green);
+  animation: progress-slide 2s ease-in-out infinite;
+}
+
+@keyframes portal-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes portal-pulse {
+  from { transform: scale(0.9); opacity: 0.7; }
+  to { transform: scale(1.1); opacity: 1; }
+}
+
+@keyframes progress-slide {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(200%); }
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .navbar-nav {

@@ -4,6 +4,7 @@ import { getAllCharsAction } from '../../redux/cardSlice';
 import Card from "../Component/Card";
 import Paginado from "../Component/Paginado";
 import Filters from "../Component/Filters";
+import Loading from "../Component/Loading";
 
 /**
  * Home View: The main dashboard of the application.
@@ -16,6 +17,7 @@ const Home = () => {
     const characters = useSelector(state => state.cardsReducer.currentCards);
     const allCharacters = useSelector(state => state.cardsReducer.allCards);
     const favorites = useSelector(state => state.cardsReducer.favoriteCards);
+    const isLoading = useSelector(state => state.cardsReducer.isLoading);
     
     const [currentPage, setCurrentPage] = useState(1);
     const [cardsPerPage] = useState(6); // Changed to 6 for better grid layout (3 per row)
@@ -59,29 +61,33 @@ const Home = () => {
                 />
             </section>
 
-            <section className="characters-grid">
-                <div className="row g-4">
-                    {currentCards.length > 0 ? (
-                        currentCards.map(({ id, name, gender, image, species }) => {
-                            const isFav = favorites.includes(id) || favorites.some(fav => Number(fav) === Number(id));
-                            return <Card 
-                                key={id}
-                                id={id}
-                                name={name}
-                                gender={gender}
-                                image={image}
-                                species={species}
-                                isFav={isFav}
-                            />
-                        })
-                    ) : (
-                        <div className="col-12 text-center py-5 glass-effect rounded-4">
-                            <h3 className="text-warning orbitron mb-0">No se encontraron personajes.</h3>
-                            <p className="text-light opacity-50 mt-2">Prueba ajustando los filtros o el texto de búsqueda.</p>
-                        </div>
-                    )}
-                </div>
-            </section>
+            {isLoading ? (
+                <Loading />
+            ) : (
+                <section className="characters-grid">
+                    <div className="row g-4">
+                        {currentCards.length > 0 ? (
+                            currentCards.map(({ id, name, gender, image, species }) => {
+                                const isFav = favorites.includes(id) || favorites.some(fav => Number(fav) === Number(id));
+                                return <Card 
+                                    key={id}
+                                    id={id}
+                                    name={name}
+                                    gender={gender}
+                                    image={image}
+                                    species={species}
+                                    isFav={isFav}
+                                />
+                            })
+                        ) : (
+                            <div className="col-12 text-center py-5 glass-effect rounded-4">
+                                <h3 className="text-warning orbitron mb-0">No se encontraron personajes.</h3>
+                                <p className="text-light opacity-50 mt-2">Prueba ajustando los filtros o el texto de búsqueda.</p>
+                            </div>
+                        )}
+                    </div>
+                </section>
+            )}
         </div>
     )
 }

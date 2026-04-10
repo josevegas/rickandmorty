@@ -13,6 +13,7 @@ const initialState = {
     favoriteCards: [],
     user: null,
     login: false,
+    isLoading: false,
 };
 
 /**
@@ -105,7 +106,11 @@ export const cardsSlice = createSlice({
         },
         getAllCharsCase: (state, action) => {
             state.allCards = action.payload;
+            state.isLoading = false;
             applyFiltersAndOrder(state);
+        },
+        setLoadingCase: (state, action) => {
+            state.isLoading = action.payload;
         },
         closeCase: (state) => {
             state.user = null;
@@ -132,6 +137,7 @@ export const {
     orderCharCase,
     discardFilterCase,
     getAllCharsCase,
+    setLoadingCase,
     closeCase,
 } = cardsSlice.actions;
 
@@ -143,10 +149,12 @@ export default cardsSlice.reducer;
  */
 export const getAllCharsAction = () => async (dispatch) => {
     try {
+        dispatch(setLoadingCase(true));
         const { data: characters } = await api.get('card/');
         dispatch(getAllCharsCase(characters));
     } catch (error) {
         console.error('Error in getAllCharsAction:', error);
+        dispatch(setLoadingCase(false));
     }
 }
 

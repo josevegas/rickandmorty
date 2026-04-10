@@ -1,6 +1,11 @@
-# CHANGELOG: Rick & Morty Multiverso
 
-## [1.1.0] - 2026-04-08
+## [1.2.0] - 2026-04-09
+
+### 🚀 Optimización y Rendimiento
+- **Caché de Base de Datos**: `getCharController` ahora persiste los personajes en la DB local (PostgreSQL), reduciendo el tiempo de carga de ~5s a <100ms en visitas subsiguientes.
+- **Sincronización Dinámica**: El backend ahora detecta automáticamente el número total de páginas de la API externa para una sincronización completa y robusta.
+- **Feedback Visual**: Implementación de una animación de **Portal Dimensional** personalizada durante la carga inicial de datos.
+- **Estado Global**: Integración de indicadores de carga (`isLoading`) en Redux Toolkit.
  
 ### 🔵 Modernización
 - **Tech Stack**: Actualización masiva de dependencias en Frontend y Backend.

@@ -13,6 +13,8 @@ Se ha llevado a cabo una auditoría y mejora integral de la aplicación. El resu
 | **Falta de Responsividad** | Alta | Refactorización de NavBar y Filtros usando Bootstrap 5 Grid (Mobile-First). |
 | **Accesibilidad Deficiente** | Media | Adición de ARIA labels, roles semánticos y alt text dinámico en imágenes. |
 | **Lógica de Autenticación Inconsistente** | Media | Estandarización de `setAccess` y corrección de redirecciones en `App.jsx`. |
+| **Tiempo de Carga API Externa** | Alta | Se implementó un sistema de **Sincronización y Caché en PostgreSQL**, reduciendo esperas tras la carga inicial. |
+| **Falta de Feedback de Carga** | Media | Creación de componente `Loading` con animación de **Portal Dimensional** (CSS/JSX). |
 | **Alertas Intrusivas (window.alert)** | Baja | Se mejoró el código para facilitar la transición a un sistema de Toast futuro. |
 
 ## 3. Resultados de Pruebas
@@ -29,8 +31,7 @@ Se ha llevado a cabo una auditoría y mejora integral de la aplicación. El resu
 - `server/index.js` & `server/src/app.js`: Corrección de rutas y typos.
 
 ## 5. Sugerencias para Futuras Mejoras
-1. **[DECISIÓN REQUERIDA]**: Implementar una base de datos local (Postgres) estable para evitar dependencias de APIs de terceros que puedan estar caídas.
-2. **Notificaciones**: Reemplazar los `window.alert` restantes por una librería como `React-Toastify` para una mejor experiencia de usuario.
+1. **Notificaciones**: Reemplazar los `window.alert` restantes por una librería como `React-Toastify` para una mejor experiencia de usuario.
 3. **TypeScript**: Migrar el proyecto a TS para asegurar tipos estáticos y reducir errores en tiempo de ejecución.
 4. **Lazy Loading**: Implementar `React.lazy` para la carga de componentes por ruta, mejorando el FCP inicial.
 
